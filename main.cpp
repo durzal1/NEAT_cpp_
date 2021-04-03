@@ -79,6 +79,7 @@ public:
 
         cout << fit_max << endl;
 
+
         cout << this->species.size() << endl;
         cout << "--------------------" << endl;
 
