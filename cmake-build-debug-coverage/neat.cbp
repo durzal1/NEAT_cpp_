@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="neat"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="neat">
+				<Option output="C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/neat.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 neat"/>
+					<CompileFile command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="neat/fast">
+				<Option output="C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/neat.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 neat/fast"/>
+					<CompileFile command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/zacky/Desktop/Coding/c++/ml/neat/cmake-build-debug-coverage/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/Cross_over.h">
+			<Option target="neat"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/Distance.h">
+			<Option target="neat"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/Neat.h">
+			<Option target="neat"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/Species.h">
+			<Option target="neat"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/Specization.h">
+			<Option target="neat"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/System.h">
+			<Option target="neat"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/calculator.h">
+			<Option target="neat"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/main.cpp">
+			<Option target="neat"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/random.h">
+			<Option target="neat"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

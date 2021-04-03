@@ -1,0 +1,10 @@
+SDL/SPEED
+1) try getting rid of every instance of sdl to make it faster
+2) only use one window
+3) instead of getting rid of everything just dont update the sdl window and dont use it in snake
+4) it takes a really long time when it gets stuck on the left-right left-right
+
+IMPROVEMENTS
+1) try a different fitness function
+2) use different inputs
+3) got a sigsegv error at gen 20

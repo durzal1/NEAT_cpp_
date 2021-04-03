@@ -1,0 +1,49 @@
+for (Genome& genome:this->genomes){
+            genome.age += 1;
+            genome.fitness = 4;
+            genome.right = 0;
+            // DO XOR
+            for (int a = 0; a < 4; a ++){
+                std::vector<float> outputs_ = calculate(genome, inputs__[a]);
+                for (float& out_:outputs_){
+                    // THIS IS SPECIFICALLY FOR XOR
+                    int guessed_output;
+                    if (out_< 0.5){
+                        guessed_output = 0;
+                    } else{
+                        guessed_output = 1;
+                    }
+                    if (guessed_output == outputscorrect[a]){
+                        float v = abs(out_ - outputscorrect[a]);
+                        genome.fitness -= v;
+                        genome.right += 1;
+                    } else{
+                        float v = abs(out_ - outputscorrect[a]); // todo fix this
+                        genome.fitness -= v;
+                    }
+                }
+            }
+            fit.push_back(genome.fitness);
+            if (genome.right == 4){
+                cout << "WORKEDDDD" << endl;
+
+            }
+            if (genome.fitness > 2.3){
+//                FILE *f = fopen("data.bin", "wb" );
+//
+//                uint64_t count_g = 0;
+//                uint64_t count_c = 0;
+//                count_g += genome.genes.size();
+//                count_c += genome.connections.size();
+//
+//                fwrite(&genome.inputs, sizeof(uint64_t),1, f);
+//                fwrite(&genome.outputs, sizeof(uint64_t),1, f);
+//
+//                fwrite(&count_g, sizeof(uint64_t), 1, f);
+//                fwrite(&count_c, sizeof(uint64_t), 1, f);
+//
+//                fwrite(&genome.genes.at(0), sizeof(NodeGene), genome.genes.size(), f);
+//                fwrite(&genome.connections.at(0), sizeof(ConnectionGene), genome.connections.size(), f);
+//                fclose(f);
+            }
+        }
