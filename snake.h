@@ -1,4 +1,3 @@
-#include <SDL2/SDL.h>
 #include <iostream>
 #include <vector>
 #include "objects.h"
@@ -7,10 +6,10 @@
 #include "calculator.h"
 
 // returns the fitness of the genome
-Fitness snake_main(Genome &genome, SDL_Window *window, SDL_Surface *windowSurface){
+Fitness snake_main(Genome &genome){
 
     // snake and apple
-    Snake snake = Snake(500, 500, windowSurface, window);
+    Snake snake = Snake(500, 500);
     Apple apple;
 
     // vectors for each
@@ -143,7 +142,6 @@ Fitness snake_main(Genome &genome, SDL_Window *window, SDL_Surface *windowSurfac
         }
 
 
-        SDL_UpdateWindowSurface(window);
 
     }
 

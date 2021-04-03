@@ -1,5 +1,4 @@
 #include <vector>
-#include <SDL2/SDL.h>
 #include <string>
 #include "random.h"
 #ifndef OPENGLTEST_OBJECTS_H
@@ -19,14 +18,7 @@ public:
     int x = (randomint(0, 10, start) * 100);
     int y = (randomint(0, 10, start) * 100);
 
-    void draw(SDL_Surface *surface){
-        //draws a red square to represent the apple
 
-        SDL_Rect rect{x,y, WIDTH, HEIGHT};
-        SDL_FillRect(surface, &rect, SDL_MapRGB(surface->format,255, 0, 0));
-
-
-    }
 
 
 };
@@ -68,37 +60,10 @@ public:
     // 0 = none | 1 = up | 2 = right | 3= down | 4 = left
     int direction = 0;
 
-    // surface
-    SDL_Surface *surface = nullptr;
-
-    // window
-    SDL_Window *window = nullptr;
-    Snake(int x, int y, SDL_Surface *surface, SDL_Window *window){
+    Snake(int x, int y){
         this->x= x;
         this->y= y;
-        this->surface = surface;
-        this->window = window;
-    }
-    void draw(){
-        // black screen to clear screen
-        SDL_FillRect(surface, nullptr, SDL_MapRGB(surface->format,0, 0, 0));
 
-        // draws the rect the will represent the snake head
-        SDL_Rect rect{x, y, width, height};
-        SDL_FillRect(surface, &rect, SDL_MapRGB(surface->format,0, 255, 0));
-
-        // draws the rest of the body
-        if (direction != 0){
-            for (int i = 0; i < snake_parts.size(); i ++){
-                // sets x and y
-                int x = snake_parts[i][0];
-                int y = snake_parts[i][1];
-
-                // draws the parts
-                SDL_Rect rect{x, y, width, height};
-                SDL_FillRect(surface, &rect, SDL_MapRGB(surface->format,0, 255, 0));
-            }
-        }
     }
     void move(){
         if (size > 1){
@@ -266,8 +231,7 @@ public:
                 }
             }
         }
-        this->draw();
-        SDL_UpdateWindowSurface(this->window);
+
     }
 };
 #endif //OPENGLTEST_OBJECTS_H

@@ -111,6 +111,8 @@ vector
 -
 Genome.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/Genome.h
+math.h
+-
 System.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/System.h
 random.h

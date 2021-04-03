@@ -2,6 +2,7 @@
 #include <list>
 #include <vector>
 #include "Genome.h"
+#include <math.h>
 using namespace std;
 #include "System.h"
 #include "random.h"
@@ -168,7 +169,7 @@ return_ Reproduce(int pop, std::vector<Species> species,std::vector<Genome> geno
         // gets the amount of genomes each species will get
         float share = species[i].fitness / sum_fitness;
         int amount = ceil(share * pop);
-        int reproduce_amount = amount * 0.75;
+        int reproduce_amount = ceil(amount * 0.75);
 
         // species reproduces to get its offsprings
         std::vector<Genome> offsprings = species[i].reproduce_(reproduce_amount, system, start, i);
@@ -178,7 +179,7 @@ return_ Reproduce(int pop, std::vector<Species> species,std::vector<Genome> geno
 
 //      gets offspring that will come from mutation and not crossover
         int mutate_share = amount;
-        int amount_share = mutate_share * 0.25;
+        int amount_share = ceil(mutate_share * 0.25);
         for (int a = 0; a < amount_share; a++) {
             // takes champion of the species and mutates it to get 25% of the species genomes
             Genome new_ = Genome(species[i].Champ);

@@ -16,7 +16,6 @@ using namespace std;
 #include "calculator.h"
 #include <fstream>
 #include "snake.h"
-#include <SDL2/SDL.h>
 
 
 
@@ -41,10 +40,6 @@ public:
     int outputs;
     int pop_size;
 
-    // sdl window and surface
-    SDL_Window *window = nullptr;
-    SDL_Surface *windowSurface = nullptr;
-
     // tests each genome
     void test(){
         //GETS FITS AND SORTS FOR TESTING PURPOSES ONLY
@@ -52,7 +47,7 @@ public:
 
         for (Genome& genome:this->genomes){
             genome.age += 1;
-            Fitness fitness = snake_main(genome, window, windowSurface);
+            Fitness fitness = snake_main(genome);
             genome.fitness = fitness;
             fit.push_back(fitness);
         }
@@ -88,12 +83,11 @@ public:
 
     }
     //constructor definition
-    Neat(int inputs, int outputs, int pop_size, SDL_Window *window, SDL_Surface *surface){
+    Neat(int inputs, int outputs, int pop_size){
         this->inputs = inputs;
         this->outputs = outputs;
         this->pop_size = pop_size;
-        this->window = window;
-        this->windowSurface = surface;
+
         main_();
 
     }
@@ -116,7 +110,7 @@ public:
                 Mutate(this->genomes[i], system,start);
             }
             //TESTING PURPOSES
-            Fitness fitness = snake_main(genomes[i], window, windowSurface);
+            Fitness fitness = snake_main(genomes[i]);
             genomes[i].fitness = fitness;
             // todo test genome here
         }
@@ -135,14 +129,7 @@ public:
             test();
             cout << "";
 
-            // resets window and surface
-            SDL_DestroyWindow(this->window);
 
-            this->window = nullptr;
-            this->windowSurface = nullptr;
-
-            this->window = SDL_CreateWindow("fff", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, SDL_WINDOW_SHOWN);
-            this->windowSurface = SDL_GetWindowSurface(window);
         }
 
     }
@@ -164,12 +151,6 @@ public:
 //}
 int main(int argc, char* argv[]) {
 
-    SDL_Window *window = nullptr;
-    SDL_Surface *windowSurface = nullptr;
-
-// window and surface
-    window = SDL_CreateWindow("fff", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, SDL_WINDOW_SHOWN);
-    windowSurface = SDL_GetWindowSurface(window);
 
 
 //    FILE *f = fopen("data.bin", "rb" );   // r,w for read, write respectively, b for binary
@@ -198,6 +179,6 @@ int main(int argc, char* argv[]) {
 //
 //    fclose(f);
 
-    Neat neat = Neat(4,3,500, window, windowSurface);
+    Neat neat = Neat(4,3,500);
     return 0;
 }

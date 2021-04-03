@@ -53,5 +53,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/OpenGLTest.dir/DependInfo.cmake"
+  "CMakeFiles/snake.dir/DependInfo.cmake"
   )

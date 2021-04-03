@@ -72,7 +72,7 @@ CMAKE_BINARY_DIR = C:\Users\zacky\Desktop\Coding\c++\ml\neat\cmake-build-debug
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/OpenGLTest.dir/all
+all: CMakeFiles/snake.dir/all
 
 .PHONY : all
 
@@ -82,36 +82,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/OpenGLTest.dir/clean
+clean: CMakeFiles/snake.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/OpenGLTest.dir
+# Target rules for target CMakeFiles/snake.dir
 
 # All Build rule for target.
-CMakeFiles/OpenGLTest.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\OpenGLTest.dir\build.make CMakeFiles/OpenGLTest.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\OpenGLTest.dir\build.make CMakeFiles/OpenGLTest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\zacky\Desktop\Coding\c++\ml\neat\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target OpenGLTest"
-.PHONY : CMakeFiles/OpenGLTest.dir/all
+CMakeFiles/snake.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\snake.dir\build.make CMakeFiles/snake.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\snake.dir\build.make CMakeFiles/snake.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\zacky\Desktop\Coding\c++\ml\neat\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target snake"
+.PHONY : CMakeFiles/snake.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/OpenGLTest.dir/rule: cmake_check_build_system
+CMakeFiles/snake.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\zacky\Desktop\Coding\c++\ml\neat\cmake-build-debug\CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/OpenGLTest.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/snake.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\zacky\Desktop\Coding\c++\ml\neat\cmake-build-debug\CMakeFiles 0
-.PHONY : CMakeFiles/OpenGLTest.dir/rule
+.PHONY : CMakeFiles/snake.dir/rule
 
 # Convenience name for target.
-OpenGLTest: CMakeFiles/OpenGLTest.dir/rule
+snake: CMakeFiles/snake.dir/rule
 
-.PHONY : OpenGLTest
+.PHONY : snake
 
 # clean rule for target.
-CMakeFiles/OpenGLTest.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\OpenGLTest.dir\build.make CMakeFiles/OpenGLTest.dir/clean
-.PHONY : CMakeFiles/OpenGLTest.dir/clean
+CMakeFiles/snake.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\snake.dir\build.make CMakeFiles/snake.dir/clean
+.PHONY : CMakeFiles/snake.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
