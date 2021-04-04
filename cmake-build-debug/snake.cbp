@@ -80,7 +80,22 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/Genome.h">
+			<Option target="snake"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/Species.h">
+			<Option target="snake"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/Specization.h">
+			<Option target="snake"/>
+		</Unit>
 		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/main.cpp">
+			<Option target="snake"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/objects.h">
+			<Option target="snake"/>
+		</Unit>
+		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/snake.h">
 			<Option target="snake"/>
 		</Unit>
 		<Unit filename="C:/Users/zacky/Desktop/Coding/c++/ml/neat/CMakeLists.txt">

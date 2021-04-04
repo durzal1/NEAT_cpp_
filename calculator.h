@@ -13,14 +13,13 @@ using namespace std;
 #ifndef NEAT_CALCULATOR_H
 #define NEAT_CALCULATOR_H
 
-const double EULER = 2.71828182845904523536;
 // define sigmoid function
 float sigmoid(float x){
-    double s = 1 / (1 + pow(EULER, -x));
+    double s = 1 / (1 + exp(-x));
     return s;
 }
 
-std::vector<float> calculate(Genome &genome, const int inputs[]) {
+std::vector<float> calculate(Genome &genome, const vector<float> inputs) {
     //resets all prev values for genes
     for (int i = 0; i < genome.genes.size(); i++) {
         genome.genes[i].value = 0;

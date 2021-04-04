@@ -49,8 +49,12 @@ public:
         // makes sure fitness will not divide by 0
         if (score != 0){
             this->fitness = score / genomes.size();
-        } else{
-            this->fitness = -1;
+        }
+        else if (genomes.size() >= 1){
+            this->fitness = 0.01;
+        }
+        else{
+            this->fitness = 0.01;
         }
     }
     bool kill(){

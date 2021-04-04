@@ -9,6 +9,7 @@ using namespace std;
 #include "types.h"
 #include "Species.h"
 #include "Neat.h"
+#include "cassert"
 
 #ifndef NEAT_SPECIZATION_H
 #define NEAT_SPECIZATION_H
@@ -137,6 +138,11 @@ std::vector<Species> Sort(std::vector<Species> s_){
         if (s_[i].fitness == fit_max){
             s_[i].fit_best = true;
         }
+        if (s_[i].fitness == -1){
+            s_.push_back(s_[i]);
+            s_.erase(s_.begin() + i);
+            s_.pop_back();
+        }
     }
     return s_;
 }
@@ -154,6 +160,7 @@ struct return_{
 };
 
 return_ Reproduce(int pop, std::vector<Species> species,std::vector<Genome> genomes,  System &system, float &start){
+
     // reproduces in each species
     float sum_fitness = 0;
     // deletes all of genomes
@@ -166,9 +173,11 @@ return_ Reproduce(int pop, std::vector<Species> species,std::vector<Genome> geno
 
     // creates the genomes
     for (int i = 0; i < species.size(); i ++){
+
         // gets the amount of genomes each species will get
         float share = species[i].fitness / sum_fitness;
         int amount = ceil(share * pop);
+
         int reproduce_amount = ceil(amount * 0.75);
 
         // species reproduces to get its offsprings
@@ -195,7 +204,7 @@ return_ Reproduce(int pop, std::vector<Species> species,std::vector<Genome> geno
     // gets rep and best genome for each species
     for (int c = 0;c < species.size(); c ++){
         Species species_ = species[c];
-        // vector for fitness
+        // vector for fitnessF
         std::vector<Fitness> fit;
 
         // gets a random genome in the species that will become the rep

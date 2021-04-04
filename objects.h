@@ -45,13 +45,13 @@ public:
     int width = WIDTH;
 
     // moves the snake has left before it dies
-    int moves = 100;
+    int moves = 50;
 
     // moves since an apple has been eaten
     int apple_moves = 0;
 
     // fitness of the snake
-    int fitness = 0;
+    float fitness = 0;
 
     // bool if the snake is dead
     bool dead = false;
@@ -171,6 +171,8 @@ public:
     }
     void grow(){
         size += 3;
+
+        this->fitness += 1;
 
         // resets apple_move
         this->apple_moves = 50;

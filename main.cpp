@@ -15,13 +15,12 @@ using namespace std;
 #include "Specization.h"
 #include "calculator.h"
 #include <fstream>
+#include "Board.h"
 #include "snake.h"
-
-
-
+using namespace snake;
 // INPUTS AND OUTPUTS FOR XOR
-const int inputs__[4][2] = {{0,0}, {1,0}, {0,1}, {1,1}};
-const int outputscorrect[4] = {0, 1, 1, 0};
+//const int inputs__[4][2] = {{0,0}, {1,0}, {0,1}, {1,1}};
+//const int outputscorrect[4] = {0, 1, 1, 0};
 float start = time(0);
 class Neat{
 public:
@@ -40,6 +39,41 @@ public:
     int outputs;
     int pop_size;
 
+    // snake_main function
+    void snake_main1(Genome &g){
+        //creates board
+        Board b{10,10};
+
+        Fitness fitness = 0;
+        // while the snake is still alive
+        while(!b.IsGameOver() && b.GetMovesWithoutApple() < 50){
+            // gets inputs and calculates the output
+            std::vector<float> inputs1 = b.getNetworkInput();
+            std::vector<float> outputs = calculate(g, inputs1);
+
+            //best output value
+            auto fit_max = *max_element(outputs.begin(), outputs.end());
+
+            auto it = std::find(outputs.begin(), outputs.end(), fit_max);
+
+            // gets index
+            int index = it - outputs.begin();
+
+            // moves snake based off of the index
+            switch (index) {
+                case 0:
+                    b.move(LEFT);
+                case 1:
+                    b.move(FORWARD);
+                case 2:
+                    b.move(RIGHT);
+            }
+
+            // gets size of snake
+            fitness = b.snakeSize();
+        }
+        g.fitness = fitness;
+    }
     // tests each genome
     void test(){
         //GETS FITS AND SORTS FOR TESTING PURPOSES ONLY
@@ -47,9 +81,8 @@ public:
 
         for (Genome& genome:this->genomes){
             genome.age += 1;
-            Fitness fitness = snake_main(genome);
-            genome.fitness = fitness;
-            fit.push_back(fitness);
+            snake_main(genome);
+            fit.push_back(genome.fitness);
         }
         //sorts
         std::sort(fit.begin(), fit.end());
@@ -110,9 +143,11 @@ public:
                 Mutate(this->genomes[i], system,start);
             }
             //TESTING PURPOSES
-            Fitness fitness = snake_main(genomes[i]);
-            genomes[i].fitness = fitness;
-            // todo test genome here
+//            Fitness fitness = snake_main(genomes[i]);
+//            genomes[i].fitness = fitness;
+
+            snake_main(genomes[i]);
+
         }
         // evolves
         while (true){
@@ -127,7 +162,6 @@ public:
             this->genomes = r.genomes__;
             this->generation += 1;
             test();
-            cout << "";
 
 
         }
@@ -179,6 +213,6 @@ int main(int argc, char* argv[]) {
 //
 //    fclose(f);
 
-    Neat neat = Neat(4,3,500);
+    Neat neat = Neat(4,3,1000);
     return 0;
 }
