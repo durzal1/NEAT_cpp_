@@ -209,10 +209,10 @@ calculator.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/calculator.h
 fstream
 -
-snake.h
-C:/Users/zacky/Desktop/Coding/c++/ml/neat/snake.h
 Board.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/Board.h
+snake.h
+C:/Users/zacky/Desktop/Coding/c++/ml/neat/snake.h
 
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/mutate.h
 iostream
@@ -271,6 +271,10 @@ types.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/types.h
 calculator.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/calculator.h
+string
+-
+cmath
+-
 
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/types.h
 cstdint

@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++11 -lmingw32 -march=native -ffast-math -pthread -fopenmp -W
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = @CMakeFiles/snake.dir/includes_CXX.rsp
+CXX_INCLUDES = @CMakeFiles/OpenGLTest.dir/includes_CXX.rsp
 

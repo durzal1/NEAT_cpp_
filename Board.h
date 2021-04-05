@@ -24,9 +24,9 @@ namespace snake{
 
 // clock wise orientation
     enum Control{
-        FORWARD = 0,
-        LEFT    = -1,
-        RIGHT   = 1
+        FORWARD_ = 0,
+        LEFT_    = -1,
+        RIGHT_   = 1
     };
 
     typedef int Coordinate;
@@ -80,7 +80,7 @@ namespace snake{
         bool removeTailNextTime = false;
         bool gameOver           = false;
         int  movesWithoutApple  = 0;
-
+        int size = 0;
     public:
 
         const Size width, height;
@@ -127,10 +127,9 @@ namespace snake{
             std::vector<float> res{};
             res.resize(4);
 
-
-            res[0] = pow(0.1, this->rangeToObstacle(snake.front(), FORWARD));
-            res[1] = pow(0.1, this->rangeToObstacle(snake.front(), LEFT));
-            res[2] = pow(0.1, this->rangeToObstacle(snake.front(), RIGHT));
+            res[0] = pow(0.1, this->rangeToObstacle(snake.front(), FORWARD_));
+            res[1] = pow(0.1, this->rangeToObstacle(snake.front(), LEFT_));
+            res[2] = pow(0.1, this->rangeToObstacle(snake.front(), RIGHT_));
 
             Field forwardNext = traverse(snake.front());
 
@@ -169,6 +168,7 @@ namespace snake{
             };
 
             if(newHead == nextFood) {
+                size ++;
                 newFoodTarget();
                 movesWithoutApple = 0;
                 removeTailNextTime = false;

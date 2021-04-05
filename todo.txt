@@ -8,5 +8,4 @@ IMPROVEMENTS
 1) try a different fitness function
 2) use different inputs
 
-works with his implementation but not mine 
-maybe its because of the angle 
+the fitness when i test is much lower then when i do it normally 

@@ -6,6 +6,7 @@
 #include "calculator.h"
 #include <string>
 #include <cmath>
+#include <SDL2/SDL.h>
 struct Vector2f{
 
     float x,y;
@@ -69,23 +70,23 @@ int rangeToObstacle(int direction, Snake snake){
     int x = snake.x;
     while(run){
         switch (direction){
-            case 1:
-                y -= snake.height;
+            case -1:
+                x -= snake.height;
 
                 // checks for obstacle with the new y
-                if (checkForObstacle(snake, snake.x, y)){
-                    run = false;
-                }
-                break;
-            case 2:
-                x += snake.height;
-
                 if (checkForObstacle(snake, x, snake.y)){
                     run = false;
                 }
                 break;
-            case 4:
-                x -= snake.height;
+            case 0:
+                y += snake.height;
+
+                if (checkForObstacle(snake, snake.x, y)){
+                    run = false;
+                }
+                break;
+            case 1:
+                x += snake.height;
 
                 if (checkForObstacle(snake, x, snake.y)){
                     run = false;
@@ -98,11 +99,20 @@ int rangeToObstacle(int direction, Snake snake){
     return count - 1;
 }
 // sets the fitness of the genome
-void snake_main(Genome &genome){
+//Genome &genome
+void snake_main(){
+
+    SDL_Window *window = nullptr;
+    SDL_Surface *windowSurface = nullptr;
+
+    // window and surface
+    window = SDL_CreateWindow("fff", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, SDL_WINDOW_SHOWN);
+    windowSurface = SDL_GetWindowSurface(window);
 
     // snake and apple
-    Snake snake = Snake(500, 500);
+    Snake snake = Snake(500, 500, windowSurface, window);
     Apple apple;
+
 
     // vectors for each
     std::vector<Snake> snakes;
@@ -126,49 +136,12 @@ void snake_main(Genome &genome){
             float angle = 0;
 
             // checks left right and above
-            space_left = pow(0.1, rangeToObstacle(4, s));
-            space_up = pow(0.1, rangeToObstacle(1, s));
-            space_right = pow(0.1, rangeToObstacle(2, s));
+            space_left = pow(0.1, rangeToObstacle(LEFT, s));
+            space_up = pow(0.1, rangeToObstacle(FORWARD, s));
+            space_right = pow(0.1, rangeToObstacle(RIGHT, s));
 
 
-
-            /// angle to the apple
-            // x and y if it went in the direction of the previous move
-            int new_x = s.x;
-            int new_y = s.y;
-            switch(s.direction){
-                case 1: new_y -= s.height; break;
-                case 2: new_x += s.height; break;
-                case 4: new_x-= s.height; break;
-            }
-            // for first move
-            if (s.direction == 0){
-                new_y -= s.height;
-            }
-
-            /// 360 angle
-            // vectors
-            vector<int> current = {7,8};
-            vector<int> apple_loc = {10,5};
-
-            //calculations
-            float mag_cur = sqrt(pow(current[0],2) + pow(current[1],2) );
-            float mag_apple = sqrt(pow(apple_loc[0],2) + pow(apple_loc[1],2) );
-
-            float top_val = current[0] * current[1] + apple_loc[0] * apple_loc[1];
-
-            // getting cos angle
-            float cosAng = top_val / (mag_cur*mag_apple);
-
-
-            // using cosine
-            float result = acos(cosAng);
-
-            // convert to degree
-            float deg = result * 180/M_PI;
-
-            // some linear algebra i dont understand lol
-            Vector2f nex {(float)new_x, (float)new_y};
+            Vector2f nex {(float)s.x, (float)s.y + s.height};
             Vector2f fod {(float)apples[0].x, (float)apples[0].y};
             Vector2f cur {(float)s.x, (float)s.y};
 
@@ -186,37 +159,37 @@ void snake_main(Genome &genome){
 
             // puts the inputs into an array
             vector<float> inputs = {space_left, space_up, space_right, angle};
+            //todo try only adding one per food
 
             // calculates the move based off the inputs
-            std::vector<float> outputs = calculate(genome, inputs);
+//            std::vector<float> outputs = calculate(genome, inputs);
 
-            /// finds the best output (one with highest value)
-            //best output value
-            auto fit_max = *max_element(outputs.begin(), outputs.end());
-
-            auto it = std::find(outputs.begin(), outputs.end(), fit_max);
-
-            // gets index
-            int index = it - outputs.begin();
-
-            // sets direction of the snake based off of the output that was calculated
-            if (index == 0){
-                s.direction = 4;
-            }
-            else if(index == 1){
-                s.direction = 1;
-            }
-            else if(index == 2){
-                s.direction = 2;
-            }
-
+//            /// finds the best output (one with highest value)
+//            //best output value
+//            auto fit_max = *max_element(outputs.begin(), outputs.end());
+//
+//            auto it = std::find(outputs.begin(), outputs.end(), fit_max);
+//
+//            // gets index
+//            int index = it - outputs.begin();
+//
+//            // sets direction of the snake based off of the output that was calculated
+//            if (index == 0){
+//                s.direction = LEFT;
+//            }
+//            else if(index == 1){
+//                s.direction = FORWARD;
+//            }
+//            else if(index == 2){
+//                s.direction = RIGHT;
+//            }
 
             // moves the snake and checks for collision with apple
             s.move();
             s.collision(apples);
 
-//            // draws the apple
-//            apples[0].draw(windowSurface);
+            // draws the apple
+            apples[0].draw(windowSurface);
 
 
             // if the snake runs out of moves it kills it
@@ -226,17 +199,17 @@ void snake_main(Genome &genome){
 
             // if the snake is dead
             if (s.dead){
-                // changes size of the genome
-                genome.size_snake = s.size;
-
-                // returns fitness of the snake
-                genome.fitness = s.fitness;
+//                // changes size of the genome
+//                genome.size_snake = s.size;
+//
+//                // returns fitness of the snake
+//                genome.fitness = s.fitness;
                 run_ = false;
             }
         }
 
-
-
+        SDL_UpdateWindowSurface(window);
+        cout << 'f';
     }
 
 }

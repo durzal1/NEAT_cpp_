@@ -17,6 +17,10 @@ enum NodeType{
     HIDDEN_NODE,
     BIAS_NODE
 };
-
+enum direction{
+    FORWARD = 0,
+    LEFT = -1,
+    RIGHT = 1,
+};
 
 #endif //NEAT_TYPES_H

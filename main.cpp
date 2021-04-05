@@ -43,10 +43,12 @@ public:
     void snake_main1(Genome &g){
         //creates board
         Board b{10,10};
-
-        Fitness fitness = 0;
+        int moves = 0;
+        Fitness fitness_ = 0;
         // while the snake is still alive
         while(!b.IsGameOver() && b.GetMovesWithoutApple() < 50){
+            moves ++;
+
             // gets inputs and calculates the output
             std::vector<float> inputs1 = b.getNetworkInput();
             std::vector<float> outputs = calculate(g, inputs1);
@@ -62,17 +64,20 @@ public:
             // moves snake based off of the index
             switch (index) {
                 case 0:
-                    b.move(LEFT);
+                    b.move(LEFT_);
                 case 1:
-                    b.move(FORWARD);
+                    b.move(FORWARD_);
                 case 2:
-                    b.move(RIGHT);
+                    b.move(RIGHT_);
             }
 
             // gets size of snake
-            fitness = b.snakeSize();
+            fitness_ = b.snakeSize();
         }
-        g.fitness = fitness;
+        if (fitness_ > 10){
+            cout << "wow";
+        }
+        g.fitness = fitness_; // write fitness in the file too
     }
     // tests each genome
     void test(){
@@ -81,8 +86,30 @@ public:
 
         for (Genome& genome:this->genomes){
             genome.age += 1;
-            snake_main(genome);
+            snake_main1(genome);
             fit.push_back(genome.fitness);
+//
+//            if (genome.fitness >= 13){
+//                FILE *f = fopen("data1.bin", "wb" );
+//
+//                uint64_t count_g = 0;
+//                uint64_t count_c = 0;
+//
+//                count_g += genome.genes.size();
+//                count_c += genome.connections.size();
+//
+//                fwrite(&genome.inputs, sizeof(int),1, f);
+//                fwrite(&genome.outputs, sizeof(int),1, f);
+//                fwrite(&genome.fitness, sizeof(float), 1, f);
+//
+//                fwrite(&count_g, sizeof(uint64_t), 1, f);
+//                fwrite(&count_c, sizeof(uint64_t), 1, f);
+//
+//                fwrite(&genome.genes.at(0), sizeof(NodeGene), genome.genes.size(), f);
+//                fwrite(&genome.connections.at(0), sizeof(ConnectionGene), genome.connections.size(), f);
+//                fclose(f);
+//
+//            }
         }
         //sorts
         std::sort(fit.begin(), fit.end());
@@ -120,7 +147,6 @@ public:
         this->inputs = inputs;
         this->outputs = outputs;
         this->pop_size = pop_size;
-
         main_();
 
     }
@@ -146,7 +172,7 @@ public:
 //            Fitness fitness = snake_main(genomes[i]);
 //            genomes[i].fitness = fitness;
 
-            snake_main(genomes[i]);
+            snake_main1(genomes[i]);
 
         }
         // evolves
@@ -184,35 +210,38 @@ public:
 
 //}
 int main(int argc, char* argv[]) {
-
-
-
-//    FILE *f = fopen("data.bin", "rb" );   // r,w for read, write respectively, b for binary
+//        FILE *t = fopen("data1.bin", "rb" );   // r,w for read, write respectively, b for binary
+//
+//        uint64_t count_g2 = 0;
+//        uint64_t count_c2 = 0;
+//
+//        int inputs2 = 0;
+//        int outputs2 = 0;
+//        float fitness = 0;
+//
+//        fread(&inputs2, sizeof(int), 1, t);
+//        fread(&outputs2, sizeof(int), 1, t);
 //
 //
-//    uint64_t count_g = 0;
-//    uint64_t count_c = 0;
+//        Genome g(inputs2,outputs2);
 //
-//    int inputs = 0;
-//    int outputs = 0;
+//        fread(&fitness, sizeof(float), 1, t);
+//        fread(&count_g2, sizeof(uint64_t), 1, t);
+//        fread(&count_c2, sizeof(uint64_t), 1, t);
 //
-//    fread(&inputs, sizeof(uint64_t), 1, f);
-//    fread(&outputs, sizeof(uint64_t), 1, f);
+//        // reserve the genes inside the vectors
+//        g.genes.resize(count_g2);
+//        g.connections.resize(count_c2);
 //
-//    Genome g(inputs,outputs);
+//        // sets fitness
+//        g.fitness = fitness;
 //
-//    fread(&count_g, sizeof(uint64_t), 1, f);
-//    fread(&count_c, sizeof(uint64_t), 1, f);
+//        fread(&g.genes.at(0), sizeof(NodeGene), g.genes.size(),t);
+//        fread(&g.connections.at(0), sizeof(ConnectionGene), g.connections.size(), t);
 //
-//    // reserve the genes inside the vectors
-//    g.genes.resize(count_g);
-//    g.connections.resize(count_c);
-//
-//    fread(&g.genes.at(0), sizeof(NodeGene), g.genes.size(), f);
-//    fread(&g.connections.at(0), sizeof(ConnectionGene), g.connections.size(), f);
-//
-//    fclose(f);
-
+//        fclose(t);
+//        snake_main1(g);
+    snake_main();
     Neat neat = Neat(4,3,1000);
     return 0;
 }
