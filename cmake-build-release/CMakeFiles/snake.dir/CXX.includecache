@@ -213,6 +213,8 @@ Board.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/Board.h
 snake.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/snake.h
+string
+-
 
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/mutate.h
 iostream
@@ -249,6 +251,8 @@ string
 -
 random.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/random.h
+types.h
+C:/Users/zacky/Desktop/Coding/c++/ml/neat/types.h
 
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/random.h
 random

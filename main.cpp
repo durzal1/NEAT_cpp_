@@ -17,6 +17,7 @@ using namespace std;
 #include <fstream>
 #include "Board.h"
 #include "snake.h"
+#include <string>
 using namespace snake;
 // INPUTS AND OUTPUTS FOR XOR
 //const int inputs__[4][2] = {{0,0}, {1,0}, {0,1}, {1,1}};
@@ -74,10 +75,7 @@ public:
             // gets size of snake
             fitness_ = b.snakeSize();
         }
-        if (fitness_ > 10){
-            cout << "wow";
-        }
-        g.fitness = fitness_; // write fitness in the file too
+        g.fitness = fitness_;
     }
     // tests each genome
     void test(){
@@ -86,7 +84,7 @@ public:
 
         for (Genome& genome:this->genomes){
             genome.age += 1;
-            snake_main1(genome);
+            snake_main(genome);
             fit.push_back(genome.fitness);
 //
 //            if (genome.fitness >= 13){
@@ -134,6 +132,7 @@ public:
 
         cout << fit_max << endl;
 
+        cout << genomes[index].size_snake << endl;
 
         cout << this->species.size() << endl;
         cout << "--------------------" << endl;
@@ -172,7 +171,7 @@ public:
 //            Fitness fitness = snake_main(genomes[i]);
 //            genomes[i].fitness = fitness;
 
-            snake_main1(genomes[i]);
+            snake_main(genomes[i]);
 
         }
         // evolves
@@ -241,7 +240,6 @@ int main(int argc, char* argv[]) {
 //
 //        fclose(t);
 //        snake_main1(g);
-    snake_main();
     Neat neat = Neat(4,3,1000);
     return 0;
 }
