@@ -1,3 +1,5 @@
+#ifndef NEAT_MUTATE_H
+#define NEAT_MUTATE_H
 #include <iostream>
 #include <list>
 #include <vector>
@@ -12,8 +14,7 @@ using namespace std;
 #include "types.h"
 #include "System.h"
 #include "random.h"
-#ifndef NEAT_MUTATE_H
-#define NEAT_MUTATE_H // .05 in smaller pop and 0.3 for large pop
+ // .05 in smaller pop and 0.3 for large pop
 const double PROBABILITY_MUTATE_LINK = 0.29;
 const double PROBABILITY_MUTATE_NODE = 0.01;
 const double PROBABILITY_MUTATE_WEIGHTS = 1;

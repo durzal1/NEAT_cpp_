@@ -1,11 +1,12 @@
+#ifndef NEAT_CROSS_OVER_H
+#define NEAT_CROSS_OVER_H
 #include <iostream>
 #include <vector>
 #include "Genome.h"
 using namespace std;
 #include "System.h"
 #include "types.h"
-#ifndef NEAT_CROSS_OVER_H
-#define NEAT_CROSS_OVER_H
+
 Genome Cross_Over(Genome &g1, Genome &g2, float &start, int species_hint){
     // g1 will have a higher fitness than g2
 

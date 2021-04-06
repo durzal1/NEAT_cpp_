@@ -1,8 +1,9 @@
+#ifndef NEAT_RANDOM_H
+#define NEAT_RANDOM_H
+
 #include <random>
 #include <iostream>
 #include "time.h"
-#ifndef NEAT_RANDOM_H
-#define NEAT_RANDOM_H
 
 
 double randomfloat(float min, float max, float start){

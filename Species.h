@@ -1,10 +1,11 @@
+#ifndef NEAT_SPECIES_H
+#define NEAT_SPECIES_H
 #include <vector>
 #include "Genome.h"
 using namespace std;
 #include "types.h"
 #include "math.h"
-#ifndef NEAT_SPECIES_H
-#define NEAT_SPECIES_H
+
 const double kill_precent = 0.7;
 class Species{
 public:

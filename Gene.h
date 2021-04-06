@@ -1,12 +1,13 @@
-#include <iostream> 
+#ifndef NEAT_GENE_H
+#define NEAT_GENE_H
+#include <iostream>
 #include <list> 
 #include <vector>
 #include <iterator> 
 #include <ostream>
 using namespace std; 
 #include "types.h"
-#ifndef NEAT_GENE_H
-#define NEAT_GENE_H
+
 struct NodeGene{
     //type of gene
     int type_gene;

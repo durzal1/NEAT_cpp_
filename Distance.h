@@ -1,3 +1,5 @@
+#ifndef NEAT_DISTANCE_H
+#define NEAT_DISTANCE_H
 #include <iostream>
 #include <list>
 #include <vector>
@@ -6,8 +8,7 @@ using namespace std;
 #include "System.h"
 #include "random.h"
 #include "types.h"
-#ifndef NEAT_DISTANCE_H
-#define NEAT_DISTANCE_H
+
 // constants
 const int c1 = 1;
 const int c2 = 1;

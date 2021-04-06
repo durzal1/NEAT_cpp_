@@ -1,3 +1,6 @@
+
+#ifndef NEAT_SPECIZATION_H
+#define NEAT_SPECIZATION_H
 #include <iostream>
 #include <list>
 #include <vector>
@@ -11,8 +14,7 @@ using namespace std;
 #include "Neat.h"
 #include "cassert"
 
-#ifndef NEAT_SPECIZATION_H
-#define NEAT_SPECIZATION_H
+
 std::vector<Species> selection(std::vector<Species> species, std::vector<Genome> genomes){
     // puts genomes into species and if there isnt one that is good for it, it will create a new one
     if (species.size() != 0){

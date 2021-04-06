@@ -1,3 +1,6 @@
+#ifndef NEAT_CALCULATOR_H
+#define NEAT_CALCULATOR_H
+
 #include <iostream>
 #include <list>
 #include <vector>
@@ -10,8 +13,6 @@ using namespace std;
 #include <ostream>
 #include "types.h"
 #include "random.h"
-#ifndef NEAT_CALCULATOR_H
-#define NEAT_CALCULATOR_H
 
 // define sigmoid function
 float sigmoid(float x){

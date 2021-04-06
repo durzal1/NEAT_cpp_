@@ -1,4 +1,6 @@
 
+#ifndef NEAT_GENOME_H
+#define NEAT_GENOME_H
 #include <iostream> 
 #include <list> 
 #include <vector>
@@ -12,8 +14,6 @@ using namespace std;
 #include "random.h"
 
 
-#ifndef NEAT_GENOME_H
-#define NEAT_GENOME_H
 struct Genome{
 
     // number of inputs the genome will have 

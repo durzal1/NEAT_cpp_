@@ -1,9 +1,10 @@
+#ifndef SNAKE_OBJECTS_H
+#define SNAKE_OBJECTS_H
+
 #include <vector>
 #include <string>
 #include "random.h"
 #include "types.h"
-#ifndef OPENGLTEST_OBJECTS_H
-#define OPENGLTEST_OBJECTS_H
 
 //VARIABLES
 int HEIGHT = 100;
@@ -217,4 +218,4 @@ public:
 
     }
 };
-#endif //OPENGLTEST_OBJECTS_H
+#endif //SNAKE_OBJECTS_H
