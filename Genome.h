@@ -70,6 +70,9 @@ struct Genome{
     // used later on for the place in the list not that important 
     int place = 0;
 
+    // used to add all of the sensors once
+    bool addSensors = true;
+
     // list of genes in the genome
     std::vector<NodeGene> genes;
 

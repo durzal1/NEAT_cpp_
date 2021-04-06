@@ -12,6 +12,7 @@
 #include <cmath>
 #include <ostream>
 #include <iostream>
+#include <SDL2/SDL.h>
 namespace snake{
 
 // clock wise
@@ -82,21 +83,32 @@ namespace snake{
         int  movesWithoutApple  = 0;
         int size = 0;
     public:
-
+        int totalSteps = 0;
         const Size width, height;
 
+//        // surface
+//        SDL_Surface *surface = nullptr;
+//
+//        // window
+//        SDL_Window *window = nullptr;
 
 
+    // add this SDL_Surface *surface, SDL_Window *window
         Board(const Size width, const Size height) : width(width), height(height) {
 
             assert(width > 3);
             assert(height > 3);
 
             this->reset();
+//            this->surface = surface;
+//            this->window = window;
         }
 
         int snakeSize(){
             return snake.size();
+        }
+        list<Field> getSnakes(){
+            return snake;
         }
 
         void reset(){
@@ -153,8 +165,32 @@ namespace snake{
 
             return res;
         }
-
+//        void draw(){
+//            // black screen to clear screen
+//            SDL_FillRect(surface, nullptr, SDL_MapRGB(surface->format,0, 0, 0));
+//
+//            std::vector<Field> result(snake.size());
+//            std::copy(snake.begin(), snake.end(), result.begin());
+//
+//            for (int i = 0; i < result.size(); i++){
+//                int x = result[i].x;
+//                int y =result[i].y;
+//
+//                // rect for body
+//                SDL_Rect rect2{x * 100, y * 100, 100, 100};
+//                SDL_FillRect(surface, &rect2, SDL_MapRGB(surface->format,0, 255, 0));
+//
+//            }
+//
+//            // rect for food
+//            SDL_Rect rect2{nextFood.x * 100, nextFood.y * 100, 100, 100};
+//            SDL_FillRect(surface, &rect2, SDL_MapRGB(surface->format,255, 0, 0));
+//            SDL_UpdateWindowSurface(window);
+//            // draws body
+//            SDL_Delay(200);
+//        }
         void move(Control control){
+            totalSteps++;
             if (gameOver) return;
 
             this->direction = transformDirection(this->direction, control);
@@ -179,6 +215,7 @@ namespace snake{
             if(isObstacle(newHead)){
                 gameOver = true;
             }
+//            draw();
 
         }
 

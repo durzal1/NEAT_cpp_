@@ -21,6 +21,7 @@ const double PROBABILITY_MUTATE_WEIGHT_SHIFT = 0.9;
 const double PROBABILITY_MUTATE_WEIGHT_RANDOM = 0.1;
 const double PROBABILITY_MUTATE_TOGGLE_LINK = 0.0;
 const double WEIGHT_SHIFT_STRENGTH = 0.30;
+const double PROBABILITY_ADD_SENSOR_ALL = 1;
 
 void mutate_link(Genome &genome, System &system, float &start){
     // per genome
@@ -331,6 +332,30 @@ void mutate_weight_shift(Genome &genome, System &system, float &start){
 
     }
 }
+void mutate_add_sensor(Genome &genome, System &system, float &start){
+    // per genome
+    for (int i = 0; i < genome.inputs; i++){
+        // randomly sets node1 and node2 innos
+        int gene1_inno = i;
+        for (int a = 0; a < genome.outputs; a++){
+            int gene2_inno = genome.inputs + a;
+
+            // gets the name of the connection (both innos in string format next to each other)
+            string connection_name = std::to_string(gene1_inno) + std::to_string(gene2_inno);
+
+            // gets innovation and weight of new connection
+            Innovation innovation_number = system.Connection_Check(gene1_inno, gene2_inno);
+            Weight weight = randomfloat(-2,2,start);
+
+            //creates gene and adds it to the connections list
+            ConnectionGene connectionGene = ConnectionGene(innovation_number, gene1_inno, gene2_inno, true, weight);
+            genome.connections.push_back(connectionGene);
+            genome.connection_innos.push_back(innovation_number);
+
+        }
+
+    }
+}
 void mutate_weight_random(Genome &genome, System &system, float &start){
     //again goes through each connection
     for (int i = 0; i < genome.connections.size(); i++){
@@ -368,6 +393,7 @@ void Mutate(Genome &genome, System &system, float &start) {
         mutate_weight_random(genome, system, start);
         mutate_weight_shift(genome, system, start);
     }
+
     genome.fix_inno();
 }
 #endif //NEAT_MUTATE_H

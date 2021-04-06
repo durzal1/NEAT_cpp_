@@ -14,7 +14,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2079c2b5-5a9c-4563-8b0b-2e367f47192b" name="Default Changelist" comment="commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board.h" beforeDir="false" afterPath="$PROJECT_DIR$/Board.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Genome.h" beforeDir="false" afterPath="$PROJECT_DIR$/Genome.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/DependInfo.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/build.make" afterDir="false" />
@@ -24,6 +26,7 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/main.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/snake.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/data1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/data1.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/snake.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/snake.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/snake.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/snake.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/snake.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/snake.dir/CXX.includecache" afterDir="false" />
@@ -35,11 +38,12 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/snake.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/snake.dir/main.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/snake.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/snake.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release/data1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/data1.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/snake.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/snake.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/snake.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/snake.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objects.h" beforeDir="false" afterPath="$PROJECT_DIR$/objects.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snake.h" beforeDir="false" afterPath="$PROJECT_DIR$/snake.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mutate.h" beforeDir="false" afterPath="$PROJECT_DIR$/mutate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +53,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -76,11 +80,6 @@
     <property name="settings.editor.selected.configurable" value="CMakeSettings" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -113,6 +112,7 @@
       <workItem from="1617472702421" duration="14452000" />
       <workItem from="1617542453803" duration="19890000" />
       <workItem from="1617642814417" duration="7721000" />
+      <workItem from="1617711839432" duration="639000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1616698957079</created>
@@ -150,15 +150,21 @@
           <url>file://$PROJECT_DIR$/types.h</url>
           <option name="timeStamp" value="78" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>95</line>
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>96</line>
+          <option name="timeStamp" value="153" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
-        <watch expression="this-&gt;species" />
-        <watch expression="species_multiple" />
-        <watch expression="species_multiple" />
-        <watch expression="species_multiple[1].rep" />
-        <watch expression="this-&gt;species" />
+        <watch expression="g.size_snake" />
       </configuration>
     </watches-manager>
   </component>

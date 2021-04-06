@@ -42,40 +42,59 @@ public:
 
     // snake_main function
     void snake_main1(Genome &g){
-        //creates board
-        Board b{10,10};
-        int moves = 0;
-        Fitness fitness_ = 0;
-        // while the snake is still alive
-        while(!b.IsGameOver() && b.GetMovesWithoutApple() < 50){
-            moves ++;
+//        SDL_Window *window = nullptr;
+//        SDL_Surface *windowSurface = nullptr;
+//
+//        // window and surface
+//        window = SDL_CreateWindow("fff", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, SDL_WINDOW_SHOWN);
+//        windowSurface = SDL_GetWindowSurface(window);
 
-            // gets inputs and calculates the output
-            std::vector<float> inputs1 = b.getNetworkInput();
-            std::vector<float> outputs = calculate(g, inputs1);
+        float TOTAL = 0;
+        int size1 = 0;
 
-            //best output value
-            auto fit_max = *max_element(outputs.begin(), outputs.end());
+        for (int i = 0; i < 10; i++){
+            //creates board
+            Board b{10,10};
+            int moves = 0;
+            Fitness fitness_ = 0;
+            // while the snake is still alive
+            while(!b.IsGameOver() && b.GetMovesWithoutApple() < 50){
+                moves ++;
 
-            auto it = std::find(outputs.begin(), outputs.end(), fit_max);
+                // gets inputs and calculates the output
+                std::vector<float> inputs1 = b.getNetworkInput();
+                std::vector<float> outputs = calculate(g, inputs1);
 
-            // gets index
-            int index = it - outputs.begin();
+                //best output value
+                auto fit_max = *max_element(outputs.begin(), outputs.end());
 
-            // moves snake based off of the index
-            switch (index) {
-                case 0:
-                    b.move(LEFT_);
-                case 1:
-                    b.move(FORWARD_);
-                case 2:
-                    b.move(RIGHT_);
+                auto it = std::find(outputs.begin(), outputs.end(), fit_max);
+
+                // gets index
+                int index = it - outputs.begin();
+
+                // moves snake based off of the index
+                switch (index) {
+                    case 0:
+                        b.move(LEFT_);
+                    case 1:
+                        b.move(FORWARD_);
+                    case 2:
+                        b.move(RIGHT_);
+                }
+
+                // gets size of snake
+
             }
-
-            // gets size of snake
-            fitness_ = b.snakeSize();
+            size1 += b.snakeSize();
+            // complex fitness func that i split into mulitple steps
+            double secondPart = (pow(2, b.snakeSize() - 2) + pow(b.snakeSize()-2, 2.1) *500);
+            double lastPart = (pow(b.snakeSize() - 2, 1.2) * pow((0.25 * b.totalSteps), 1.3));
+            double fitness__ = b.totalSteps + secondPart - lastPart;
+            TOTAL += fitness__;
         }
-        g.fitness = fitness_;
+        g.size_snake = size1 / 10;
+        g.fitness = TOTAL / 10;
     }
     // tests each genome
     void test(){
@@ -84,30 +103,29 @@ public:
 
         for (Genome& genome:this->genomes){
             genome.age += 1;
-            snake_main(genome);
+            snake_main1(genome);
             fit.push_back(genome.fitness);
-//
-//            if (genome.fitness >= 13){
-//                FILE *f = fopen("data1.bin", "wb" );
-//
-//                uint64_t count_g = 0;
-//                uint64_t count_c = 0;
-//
-//                count_g += genome.genes.size();
-//                count_c += genome.connections.size();
-//
-//                fwrite(&genome.inputs, sizeof(int),1, f);
-//                fwrite(&genome.outputs, sizeof(int),1, f);
-//                fwrite(&genome.fitness, sizeof(float), 1, f);
-//
-//                fwrite(&count_g, sizeof(uint64_t), 1, f);
-//                fwrite(&count_c, sizeof(uint64_t), 1, f);
-//
-//                fwrite(&genome.genes.at(0), sizeof(NodeGene), genome.genes.size(), f);
-//                fwrite(&genome.connections.at(0), sizeof(ConnectionGene), genome.connections.size(), f);
-//                fclose(f);
-//
-//            }
+            if (genome.size_snake >= 15){
+                FILE *f = fopen("data1.bin", "wb" );
+
+                uint64_t count_g = 0;
+                uint64_t count_c = 0;
+
+                count_g += genome.genes.size();
+                count_c += genome.connections.size();
+
+                fwrite(&genome.inputs, sizeof(int),1, f);
+                fwrite(&genome.outputs, sizeof(int),1, f);
+                fwrite(&genome.fitness, sizeof(float), 1, f);
+
+                fwrite(&count_g, sizeof(uint64_t), 1, f);
+                fwrite(&count_c, sizeof(uint64_t), 1, f);
+
+                fwrite(&genome.genes.at(0), sizeof(NodeGene), genome.genes.size(), f);
+                fwrite(&genome.connections.at(0), sizeof(ConnectionGene), genome.connections.size(), f);
+                fclose(f);
+
+            }
         }
         //sorts
         std::sort(fit.begin(), fit.end());
@@ -132,6 +150,8 @@ public:
 
         cout << fit_max << endl;
 
+        cout << genomes[index].connections.size() << endl;
+
         cout << genomes[index].size_snake << endl;
 
         cout << this->species.size() << endl;
@@ -151,6 +171,38 @@ public:
     }
 
     [[noreturn]] void main_(){
+        FILE *t = fopen("data1.bin", "rb" );   // r,w for read, write respectively, b for binary
+
+        uint64_t count_g2 = 0;
+        uint64_t count_c2 = 0;
+
+        int inputs2 = 0;
+        int outputs2 = 0;
+        float fitness = 0;
+
+        fread(&inputs2, sizeof(int), 1, t);
+        fread(&outputs2, sizeof(int), 1, t);
+
+
+        Genome g(inputs2,outputs2);
+
+        fread(&fitness, sizeof(float), 1, t);
+        fread(&count_g2, sizeof(uint64_t), 1, t);
+        fread(&count_c2, sizeof(uint64_t), 1, t);
+
+        // reserve the genes inside the vectors
+        g.genes.resize(count_g2);
+        g.connections.resize(count_c2);
+
+        // sets fitness
+        g.fitness = fitness;
+
+        fread(&g.genes.at(0), sizeof(NodeGene), g.genes.size(),t);
+        fread(&g.connections.at(0), sizeof(ConnectionGene), g.connections.size(), t);
+
+        fclose(t);
+        snake_main1(g);
+
         System system;
         // this is for the 0th generation
         // creates a genome for the population size
@@ -171,7 +223,7 @@ public:
 //            Fitness fitness = snake_main(genomes[i]);
 //            genomes[i].fitness = fitness;
 
-            snake_main(genomes[i]);
+            snake_main1(genomes[i]);
 
         }
         // evolves
