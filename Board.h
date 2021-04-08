@@ -86,22 +86,22 @@ namespace snake{
         int totalSteps = 0;
         const Size width, height;
 
-//        // surface
-//        SDL_Surface *surface = nullptr;
-//
-//        // window
-//        SDL_Window *window = nullptr;
+        // surface
+        SDL_Surface *surface = nullptr;
+
+        // window
+        SDL_Window *window = nullptr;
 
 
     // add this SDL_Surface *surface, SDL_Window *window
-        Board(const Size width, const Size height) : width(width), height(height) {
+        Board(const Size width, const Size height,SDL_Surface *surface, SDL_Window *window) : width(width), height(height) {
 
             assert(width > 3);
             assert(height > 3);
 
             this->reset();
-//            this->surface = surface;
-//            this->window = window;
+            this->surface = surface;
+            this->window = window;
         }
 
         int snakeSize(){
@@ -165,30 +165,38 @@ namespace snake{
 
             return res;
         }
-//        void draw(){
-//            // black screen to clear screen
-//            SDL_FillRect(surface, nullptr, SDL_MapRGB(surface->format,0, 0, 0));
-//
-//            std::vector<Field> result(snake.size());
-//            std::copy(snake.begin(), snake.end(), result.begin());
-//
-//            for (int i = 0; i < result.size(); i++){
-//                int x = result[i].x;
-//                int y =result[i].y;
-//
-//                // rect for body
-//                SDL_Rect rect2{x * 100, y * 100, 100, 100};
-//                SDL_FillRect(surface, &rect2, SDL_MapRGB(surface->format,0, 255, 0));
-//
-//            }
-//
-//            // rect for food
-//            SDL_Rect rect2{nextFood.x * 100, nextFood.y * 100, 100, 100};
-//            SDL_FillRect(surface, &rect2, SDL_MapRGB(surface->format,255, 0, 0));
-//            SDL_UpdateWindowSurface(window);
-//            // draws body
-//            SDL_Delay(200);
-//        }
+        void draw(){
+            // black screen to clear screen
+            SDL_FillRect(surface, nullptr, SDL_MapRGB(surface->format,0, 0, 0));
+
+            std::vector<Field> result(snake.size());
+            std::copy(snake.begin(), snake.end(), result.begin());
+
+            for (int i = 0; i < result.size(); i++){
+                int x = result[i].x;
+                int y =result[i].y;
+                if (i == 0){
+                    // rect for head
+                    SDL_Rect rect2{x * 50, 950 -y * 50, 50, 50};
+                    SDL_FillRect(surface, &rect2, SDL_MapRGB(surface->format,0, 0, 255));
+
+                } else{
+                    // rect for body
+                    SDL_Rect rect2{x * 50, 950 -y * 50, 50, 50};
+                    SDL_FillRect(surface, &rect2, SDL_MapRGB(surface->format,0, 255, 0));
+                }
+
+
+            }
+
+            // rect for food
+            SDL_Rect rect2{nextFood.x * 50, 950 - nextFood.y * 50, 50, 50};
+            SDL_FillRect(surface, &rect2, SDL_MapRGB(surface->format,255, 0, 0));
+            SDL_UpdateWindowSurface(window);
+            // draws body
+            SDL_Delay(25);
+        }
+
         void move(Control control){
             totalSteps++;
             if (gameOver) return;
@@ -215,7 +223,7 @@ namespace snake{
             if(isObstacle(newHead)){
                 gameOver = true;
             }
-//            draw();
+            draw();
 
         }
 
@@ -254,9 +262,9 @@ namespace snake{
             while(!isObstacle(current)){
                 switch (transformDirection(this->direction, control)){
                     case 0: current = {current.x, current.y+1}; break;
-                    case 1: current = {current.x-1, current.y}; break;
+                    case 1: current = {current.x+1, current.y}; break;
                     case 2: current = {current.x, current.y-1}; break;
-                    case 3: current = {current.x+1, current.y}; break;
+                    case 3: current = {current.x-1, current.y}; break;
                 }
                 count ++;
             }
@@ -266,28 +274,33 @@ namespace snake{
         Field traverse(Field root){
             switch (direction){
                 case 0: return {root.x, root.y+1};
-                case 1: return {root.x-1, root.y};
+                case 1: return {root.x+1, root.y};
                 case 2: return {root.x, root.y-1};
-                case 3: return {root.x+1, root.y};
+                case 3: return {root.x-1, root.y};
             }
             return {-1,-1};
         }
 
         Direction transformDirection(Direction direction, Control control){
-            return Direction((direction + control + 4) % 4);
+            Direction c =  Direction((direction + control + 4) % 4);
+            return c;
         }
 
         bool isObstacle(Field field){
 
-            for(Field& f:snake){
-                if(f != snake.front() && f == field){
-                    return true;
-                }
+            if(field.x < 0 || field.x >= width || field.y < 0 || field.y >= height){
+                return true;
             }
 
+            bool first = true;
+            for(Field& f:snake){
+                if(!first && f == field){
+                    return true;
+                }
+                first = false;
+            }
 
-
-            return field.x < 0 || field.x >= width || field.y < 0 || field.y >= height;
+            return false;
         }
 
     };

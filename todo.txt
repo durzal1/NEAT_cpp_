@@ -8,4 +8,6 @@ IMPROVEMENTS
 1) try a different fitness function
 2) use different inputs
 
-it does not die when it hits itself and it runs out of moves
+make my snake like his
+make sure apple cannot spawn inside of the snake(do this first)
+the main problem with mine rn is it just doesnt learn to not hit itself so i prob messed up my border input or smth

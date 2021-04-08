@@ -39,7 +39,7 @@ public:
 
     void fitness_func(){
         // score will be the new fitness of the species
-        float score = 0;
+        double score = 0;
 
         // loop that will add all the fitness scores into score and fit
         for (int i = 0; i < genomes.size();i++){
@@ -109,7 +109,7 @@ public:
 
         // list of offsprings with mutations
         std::vector<Genome> offsprings_new;
-        float sum_fitness = 0;
+        double sum_fitness = 0;
 
         // checks if there is more than one genome
         if (genomes.size() != 1){

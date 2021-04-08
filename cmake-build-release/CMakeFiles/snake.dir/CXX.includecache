@@ -213,6 +213,8 @@ fstream
 -
 Board.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/Board.h
+cmath
+-
 snake.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/snake.h
 string
@@ -255,6 +257,8 @@ random.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/random.h
 types.h
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/types.h
+SDL2/SDL.h
+-
 
 C:/Users/zacky/Desktop/Coding/c++/ml/neat/random.h
 random

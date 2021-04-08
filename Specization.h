@@ -109,7 +109,7 @@ std::vector<Species> Sort(std::vector<Species> s_){
     std::vector<Species> dead_species;
 
     // list of fitnesses
-    std::vector<float> fit;
+    std::vector<Fitness> fit;
 
 //     loop that gives each species a fitness and kills a precentage of its population
 //     if the species dies it adds it to dead_species
@@ -164,7 +164,7 @@ struct return_{
 return_ Reproduce(int pop, std::vector<Species> species,std::vector<Genome> genomes,  System &system, float &start){
 
     // reproduces in each species
-    float sum_fitness = 0;
+    long double sum_fitness = 0;
     // deletes all of genomes
     genomes.clear();
 
@@ -177,7 +177,7 @@ return_ Reproduce(int pop, std::vector<Species> species,std::vector<Genome> geno
     for (int i = 0; i < species.size(); i ++){
 
         // gets the amount of genomes each species will get
-        float share = species[i].fitness / sum_fitness;
+        double share = species[i].fitness / sum_fitness;
         int amount = ceil(share * pop);
 
         int reproduce_amount = ceil(amount * 0.75);

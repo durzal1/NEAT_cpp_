@@ -5,10 +5,10 @@
 #include <string>
 #include "random.h"
 #include "types.h"
-
+#include <SDL2/SDL.h>
 //VARIABLES
-int HEIGHT = 100;
-int WIDTH = 100;
+int HEIGHT = 20;
+int WIDTH = 20;
 
 //apple class
 class Apple{
@@ -16,18 +16,31 @@ public:
     // doesnt do anything i just need it
     float start = 3;
 
+    int x;
+    int y;
+
 
     //randomly sets x and y
-    int x = (randomint(0, 10, start) * 100);
-    int y = (randomint(0, 10, start) * 100);
+    Apple(){
+        this->init();
+    }
 
-//    void draw(SDL_Surface *surface){
-//        //draws a red square to represent the apple
-//        SDL_Rect rect{x,y, WIDTH, HEIGHT};
-//        SDL_FillRect(surface, &rect, SDL_MapRGB(surface->format,255, 0, 0));
-//
-//
-//    }
+    void init(){
+
+        x = (randomint(0, 9, start) * 100);
+        y = (randomint(0, 9, start) * 100);
+
+    }
+
+
+    void draw(SDL_Surface *surface) {
+
+        //draws a red square to represent the apple
+        SDL_Rect rect{x, 900 - y, WIDTH, HEIGHT};
+        SDL_FillRect(surface, &rect, SDL_MapRGB(surface->format, 255, 0, 0));
+    }
+
+
 
 };
 
@@ -65,45 +78,63 @@ public:
     int apple_moves = 0;
 
     // fitness of the snake
-    float fitness = 0;
+    Fitness fitness = 0;
 
     // bool if the snake is dead
     bool dead = false;
 
-    // direction the snake is currently going
+    // direction used for calculating the real direction
     int direction = 0;
-//
-//    // surface
-//    SDL_Surface *surface = nullptr;
-//
-//    // window
-//    SDL_Window *window = nullptr;
 
-    Snake(int x, int y){
+    // the cardinal direction it is facing
+    int CardinalDirection = NORTH;
+
+    // the real direction the snake is going (DEPENDENT ON CARDINAL DIRECTION)
+    int real_direction = UP1;
+
+    // surface
+    SDL_Surface *surface = nullptr;
+
+    // window
+    SDL_Window *window = nullptr;
+
+//, SDL_Surface *surface, SDL_Window *window
+    Snake(int x, int y, SDL_Surface *surface, SDL_Window *window){
         this->x= x;
         this->y= y;
-//        this->surface = surface;
-//        this->window = window;
+        this->surface = surface;
+        this->window = window;
     }
-//    void draw(){
-//        // black screen to clear screen
-//        SDL_FillRect(surface, nullptr, SDL_MapRGB(surface->format,0, 0, 0));
-//
-//        // draws the rect the will represent the snake head
-//        SDL_Rect rect1{x, y, width, height};
-//        SDL_FillRect(surface, &rect1, SDL_MapRGB(surface->format,0, 255, 0));
-//
-//        // draws the rest of the body
-//        for (int i = 0; i < snake_parts.size(); i ++){
-//            // sets x and y
-//            int x = snake_parts[i][0];
-//            int y = snake_parts[i][1];
-//            // draws the parts
-//            SDL_Rect rect{x, y, width, height};
-//            SDL_FillRect(surface, &rect, SDL_MapRGB(surface->format,0, 255, 0));
-//
-//        }
-//    }
+    void draw(){
+        // black screen to clear screen
+        SDL_FillRect(surface, nullptr, SDL_MapRGB(surface->format,0, 0, 0));
+
+        // draws the rect the will represent the snake head
+        SDL_Rect rect1{x,900- y, width, height};
+        SDL_FillRect(surface, &rect1, SDL_MapRGB(surface->format,0, 0, 255));
+
+        // draws the rest of the body
+        for (int i = 0; i < snake_parts.size(); i ++){
+            // sets x and y
+            int x = snake_parts[i][0];
+            int y = snake_parts[i][1];
+            // draws the parts
+            SDL_Rect rect{x, 900-y, width, height};
+            SDL_FillRect(surface, &rect, SDL_MapRGB(surface->format,0, 255, 0));
+
+        }
+    }
+
+    //checks to see what direction the snake is moving
+    // then moves it that direction
+    void getDirection(){
+        // calculates which direction it will move
+        int go = (this->CardinalDirection + direction + 4) % 4;
+        this->real_direction = go;
+
+        // resets cardinal direction
+        this->CardinalDirection = go;
+    }
     void move(){
         if (size > 1){
 
@@ -117,23 +148,31 @@ public:
         // removes the old snake head
         this->snake_head.clear();
 
-        //checks to see what direction the snake is moving
+        this->getDirection();
+
+        /// moves the snake based off of the real direction
         // if its going up
-        if (direction == 0){
+        if (real_direction == UP1){
             // updates y cord
             this->y += this->height;
         }
-        // going left
-        else if (direction == -1){
-            // updates y cord
+            // going left
+        else if (real_direction == LEFT1){
+            // updates x cord
             this->x -= this->height;
 
         }
-        //going right
-        else if (direction == 1) {
+            //going right
+        else if (real_direction == RIGHT1) {
             // updates x cord
             this->x += height;
         }
+        // going down
+        else if (real_direction == DOWN1){
+            //updates  y
+            this->y -= height;
+        }
+
         // adds the new head
         std::vector<int> new_cords{this->x, this->y};
 
@@ -166,27 +205,11 @@ public:
         if (this->x < 0 || this->y < 0 || this->x >= 1000 || this->y >= 1000){
             this->die();
         }
-//        this->draw();
+        this->draw();
     }
     // kills the snake
     void die(){
-        // clears snake_parts
-        snake_parts.clear();
-
-        // resets x and y
-        this->x = 500;
-        this->y = 500;
-        this->dead = true;
-
-        // resets size and direction
-        direction = 0;
-        size = 1;
-
-        // adds the new head
-        std::vector<int> new_cords{this->x, this->y};
-
-        this->snake_head.push_back(new_cords);
-
+        dead = true;
     }
     void collision(std::vector<Apple> &apples){
 
@@ -198,8 +221,28 @@ public:
             // clears the apples vector
             apples.clear();
 
-            // re adds another apple
-            apples.push_back(Apple());
+            // creates an apple
+            Apple apple = Apple();
+
+            bool d = false;
+            while (!d){
+                // makes sure the apple is not in the head
+                if (apple.x == x && apple.y == y){
+                    // creates a new apple
+                    apple = Apple();
+                    continue;
+                }
+                // makes sure the apple is not in the body
+                for (int i = 0; i < snake_parts.size(); i++){
+                    if (snake_parts[i][0] == apple.x && snake_parts[i][1] == apple.y){
+                        apple = Apple();
+                        continue;
+                    }
+                }
+                d = true;
+            }
+            // re adds the apple
+            apples.push_back(apple);
 
             this->grow();
         }

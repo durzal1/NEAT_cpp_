@@ -16,6 +16,7 @@ using namespace std;
 #include "calculator.h"
 #include <fstream>
 #include "Board.h"
+#include <cmath>
 #include "snake.h"
 #include <string>
 using namespace snake;
@@ -42,23 +43,24 @@ public:
 
     // snake_main function
     void snake_main1(Genome &g){
-//        SDL_Window *window = nullptr;
-//        SDL_Surface *windowSurface = nullptr;
-//
-//        // window and surface
-//        window = SDL_CreateWindow("fff", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, SDL_WINDOW_SHOWN);
-//        windowSurface = SDL_GetWindowSurface(window);
+        SDL_Window *window = nullptr;
+        SDL_Surface *windowSurface = nullptr;
 
-        float TOTAL = 0;
+        // window and surface
+        window = SDL_CreateWindow("fff", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, SDL_WINDOW_SHOWN);
+        windowSurface = SDL_GetWindowSurface(window);
+
+        double TOTAL = 0;
         int size1 = 0;
 
         for (int i = 0; i < 10; i++){
             //creates board
-            Board b{10,10};
+            Board b{20,20, windowSurface, window};
             int moves = 0;
             Fitness fitness_ = 0;
             // while the snake is still alive
-            while(!b.IsGameOver() && b.GetMovesWithoutApple() < 50){
+
+            while(!b.IsGameOver() && b.GetMovesWithoutApple() < 150){
                 moves ++;
 
                 // gets inputs and calculates the output
@@ -77,13 +79,14 @@ public:
                 switch (index) {
                     case 0:
                         b.move(LEFT_);
+                        break;
                     case 1:
                         b.move(FORWARD_);
+                        break;
                     case 2:
                         b.move(RIGHT_);
+                        break;
                 }
-
-                // gets size of snake
 
             }
             size1 += b.snakeSize();
@@ -95,18 +98,21 @@ public:
         }
         g.size_snake = size1 / 10;
         g.fitness = TOTAL / 10;
+        cout << "";
+
     }
     // tests each genome
     void test(){
         //GETS FITS AND SORTS FOR TESTING PURPOSES ONLY
-        vector<float> fit;
+        vector<double> fit;
 
         for (Genome& genome:this->genomes){
             genome.age += 1;
             snake_main1(genome);
             fit.push_back(genome.fitness);
-            if (genome.size_snake >= 15){
-                FILE *f = fopen("data1.bin", "wb" );
+
+            if (genome.size_snake >= 30){
+                FILE *f = fopen("best.bin", "wb" );
 
                 uint64_t count_g = 0;
                 uint64_t count_c = 0;
@@ -116,7 +122,7 @@ public:
 
                 fwrite(&genome.inputs, sizeof(int),1, f);
                 fwrite(&genome.outputs, sizeof(int),1, f);
-                fwrite(&genome.fitness, sizeof(float), 1, f);
+                fwrite(&genome.fitness, sizeof(double), 1, f);
 
                 fwrite(&count_g, sizeof(uint64_t), 1, f);
                 fwrite(&count_c, sizeof(uint64_t), 1, f);
@@ -171,14 +177,14 @@ public:
     }
 
     [[noreturn]] void main_(){
-        FILE *t = fopen("data1.bin", "rb" );   // r,w for read, write respectively, b for binary
+        FILE *t = fopen("best.bin", "rb" );   // r,w for read, write respectively, b for binary
 
         uint64_t count_g2 = 0;
         uint64_t count_c2 = 0;
 
         int inputs2 = 0;
         int outputs2 = 0;
-        float fitness = 0;
+        double fitness = 0;
 
         fread(&inputs2, sizeof(int), 1, t);
         fread(&outputs2, sizeof(int), 1, t);
@@ -186,7 +192,7 @@ public:
 
         Genome g(inputs2,outputs2);
 
-        fread(&fitness, sizeof(float), 1, t);
+        fread(&fitness, sizeof(double), 1, t);
         fread(&count_g2, sizeof(uint64_t), 1, t);
         fread(&count_c2, sizeof(uint64_t), 1, t);
 

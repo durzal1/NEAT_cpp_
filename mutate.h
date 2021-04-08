@@ -53,7 +53,7 @@ void mutate_link(Genome &genome, System &system, float &start){
         }
 
         // if gene1 is an output go next or gene2 is an bias/input
-        if ((gene1.type_gene == 1) || (gene2.type_gene == 0) || (gene2.type_gene == 3 )) {
+        if (gene1.type_gene == 1  || gene2.type_gene == 0 || gene2.type_gene == 3 ) {
             continue;
         }
         if (gene2.type_gene == 3){
@@ -334,7 +334,6 @@ void mutate_weight_shift(Genome &genome, System &system, float &start){
     }
 }
 void mutate_add_sensor(Genome &genome, System &system, float &start){
-    // per genome
     for (int i = 0; i < genome.inputs; i++){
         // randomly sets node1 and node2 innos
         int gene1_inno = i;
@@ -380,6 +379,10 @@ void Mutate(Genome &genome, System &system, float &start) {
     vector<ConnectionGene> prev = genome.connections;
     vector<NodeGene> prev_ = genome.genes;
     //gets 3 different probabilities to see what mutations should occur
+//    if (genome.connections.size() == 0){
+//        mutate_add_sensor(genome, system, start);
+//    }
+
     // weight mutations, mutate node, and mutate link
     float n2 = randomfloat(0, 1, start);
     if (PROBABILITY_MUTATE_LINK >= n2) {
@@ -394,6 +397,7 @@ void Mutate(Genome &genome, System &system, float &start) {
         mutate_weight_random(genome, system, start);
         mutate_weight_shift(genome, system, start);
     }
+
 
     genome.fix_inno();
 }
